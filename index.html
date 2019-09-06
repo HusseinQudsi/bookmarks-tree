@@ -111,50 +111,79 @@
   <script async="" src="https://cdn.iframe.ly/embed.js" charset="utf-8"></script>
   <script>
 
-  // var placeHolder = [
-  //
-  //   {
-  //     "folder": "Developer",
-  //     "children": [
-  //       {
-  //         "link": "https://www.youtube.com/watch?v=0cB4D65vsIQ&list=PL6cactdCCnTK7Su3WF--4jZdd5K-vk_78"
-  //       },
-  //       {
-  //         "link": "https://www.youtube.com/watch?v=IhJGJG-9Dx8&list=PLI1t_8YX-Apv-UiRlnZwqqrRT8D1RhriX"
-  //       },
-  //       {
-  //         "folder": "CSS / UX",
-  //         "children": [
-  //           {
-  //             "link": "http://colorlisa.com/"
-  //           },
-  //           {
-  //             "link": "https://www.youtube.com/watch?v=br-0i3U1VCA"
-  //           }
-  //         ]
-  //       },
-  //       {
-  //         "folder": "JSON Tools",
-  //         "children": [
-  //           {
-  //             "link": "https://www.json-generator.com/"
-  //           }
-  //         ]
-  //       },
-  //       {
-  //         "folder": "JSON Tools",
-  //         "children": [
-  //           {
-  //             "link": "https://zeit.co/dashboard"
-  //           },
-  //           {
-  //             "link": "https://analytics.google.com/analytics/web/"
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   }
-  // ];
+  var placeHolder = [
+
+    {
+      "folder": "Developer",
+      "children": [
+        {
+          "link": "https://www.youtube.com/watch?v=0cB4D65vsIQ&list=PL6cactdCCnTK7Su3WF--4jZdd5K-vk_78"
+        },
+        {
+          "link": "https://www.youtube.com/watch?v=IhJGJG-9Dx8&list=PLI1t_8YX-Apv-UiRlnZwqqrRT8D1RhriX"
+        },
+        {
+          "folder": "CSS / UX",
+          "children": [
+            {
+              "link": "http://colorlisa.com/"
+            },
+            {
+              "link": "https://www.youtube.com/watch?v=br-0i3U1VCA"
+            }
+          ]
+        },
+        {
+          "folder": "JSON Tools",
+          "children": [
+            {
+              "link": "https://www.json-generator.com/"
+            }
+          ]
+        },
+        {
+          "folder": "JSON Tools",
+          "children": [
+            {
+              "link": "https://zeit.co/dashboard"
+            },
+            {
+              "link": "https://analytics.google.com/analytics/web/"
+            }
+          ]
+        },
+        {
+          "folder": "Mix",
+          "children": [
+            {
+              "link": "https://main.dailyflix.stream"
+            },
+            {
+              "link": "https://www.ffmovies.to/genre/action"
+            },
+            {
+              "link": "https://www.crunchyroll.com"
+            },
+            {
+              "link": "https://www.gogoanime1.com"
+            },
+            {
+              "link": "https://teamtreehouse.com/library/regular-expressions-in-javascript"
+            },
+            {
+              "link": "https://www.w3schools.com/html/"
+            },
+            {
+              "link": "https://www.lynda.com/javascript-training-tutorials/244-0.html"
+            },
+            {
+              "link": "https://www.pluralsight.com/courses/nodejs-big-picture"
+            }
+          ]
+        }
+      ]
+    }
+  ];
 
   var jsonUrl = location.search && location.search.replace('?json=', '') || JSON.stringify(placeHolder);
   var treeData = JSON.parse(decodeURI(jsonUrl));

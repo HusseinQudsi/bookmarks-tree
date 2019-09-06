@@ -7,8 +7,17 @@
 -->
 <html lang="en"><head>
   <meta charset="utf-8">
+  <meta name="author" content="Hussein Q.">
   <title>Tree Example</title>
   <style>
+
+  body {
+    font-family: "Galaxie",Georgia,Helvetica,Arial,serif;
+    font-size: 16px;
+    line-height: 2;
+    color: #444;
+    min-width: 1200px;
+  }
   .node {
     cursor: pointer;
   }
@@ -25,15 +34,79 @@
     stroke: #ccc;
     stroke-width: 2px;
   }
+  main {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  aside {
+    width: 300px;
+    /* background-color: lightblue; */
+    position: absolute;
+    height: 100vh;
+    opacity: 0;
+    transition: opacity .5s cubic-bezier(0.55, 0.09, 0.68, 0.53);
+    z-index: -1;
+    overflow: scroll;
+    background-image: linear-gradient(30deg, #dfe3e8 25%, #cfdde6 25%, #cfdde6 50%, #dfe3e8 50%, #dfe3e8 75%, #cfdde6 75%, #cfdde6 100%);
+  }
+  aside h1 {
+    font-size: 18px;
+    font-weight: 400;
+    word-break: break-word;
+    padding: 10px 10px 0 10px;
+    margin: 0;
+  }
+  aside a h1 {
+    /* padding: 10px 10px 0 10px;
+    margin: 0; */
+  }
+  aside h2 {
+    font-size: 16px;
+    padding: 0 10px 10px 10px;
+    font-weight: 400;
+    word-break: break-word;
+  }
+  aside a {
+    text-decoration: none;
+    color: #3c8ed2;
+    padding: 5px;
+    display: block;
+  }
+  aside a:hover {
+    color: cornflowerblue;
+  }
+  aside p {
+    padding: 5px;
+    margin: 0;
+  }
+  aside p {
+    padding: 5px;
+    margin: 0;
+  }
+  .showpanel {
+    opacity: 1;
+    z-index: 999;
+  }
+  .author {
+    color: initial !important;
+  }
+
   </style>
 </head>
 
 <body>
+  <main>
+    <aside class="showpanel">
+      <p>hello</p>
+    </aside>
+    <section>
+    </section>
+  </main>
   <script src="https://d3js.org/d3.v3.min.js"></script>
+  <script async="" src="https://cdn.iframe.ly/embed.js" charset="utf-8"></script>
   <script>
 
-
-  var placeHolder = [];
   // var placeHolder = [
   //
   //   {
@@ -84,7 +157,7 @@
 
   let promiseArray = [];
   let favicon = 'https://favicongrabber.com/api/grab/';
-  let titleApi = 'https://textance.herokuapp.com/title/';
+  let iframelyApi = 'http://iframe.ly/api/oembed?url=';
 
   function generateUrl(item) {
     return new Promise(function(resolve, reject) {
@@ -94,7 +167,7 @@
       }
 
       let urlString = new URL(item.link);
-      let titleUrl = `${titleApi}${(urlString.hostname || urlString.host || '')}`
+      let iframeUrl = `${iframelyApi}${encodeURIComponent(item.link)}&api_key=cbce8adc63c693fc118a5d`;
       let url = `${favicon}${(urlString.hostname || urlString.host || '').replace(/www\./i, '')}`;
       let fetchComplete = false;
 
@@ -103,7 +176,7 @@
       .then(function(response) { return response.json(); })
       .then(function(myJson) {
 
-        let data = myJson && myJson.icons && myJson.icons.length && myJson.icons[2] || myJson.icons[1] || myJson.icons[0];
+        let data = myJson && myJson.icons && myJson.icons.length && (myJson.icons || [])[2] || (myJson.icons|| [])[1] || (myJson.icons || [])[0];
         let src = data ? data.src : null;
 
         item.favicon = src;
@@ -119,13 +192,22 @@
       }).catch(function (error) { debugger; });
 
       // Fetching Title
-      fetch(titleUrl)
-      .then(function(response) { return response.text(); })
+      fetch(iframeUrl)
+      .then(function(response) { return response.json(); })
       .then(function(myJson) {
 
-        if (myJson.match(/Redirecting/ig)) { myJson = urlString.hostname || urlString.host; }
+        if (myJson.status > 400) {
 
-        item.title = myJson;
+          item.title = urlString.hostname || urlString.host;
+          item.iframe = null;
+
+        } else {
+
+          item.title = myJson.title;
+          item.iframe = myJson.html;
+          item.metaData = myJson;
+        }
+
 
         if (fetchComplete) {
 
@@ -176,7 +258,7 @@
   var diagonal = d3.svg.diagonal()
   .projection(function(d) { return [d.y, d.x]; });
 
-  var svg = d3.select("body").append("svg")
+  var svg = d3.select("section").append("svg")
   .attr("width", width + margin.right + margin.left)
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -215,7 +297,62 @@
     var nodeEnter = node.enter().append("g")
     .attr("class", "node")
     .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+    .on("mouseleave", hidePanel)
+    .on("mouseover", showPanel)
     .on("click", click);
+
+    function hidePanel(event) {
+
+      var temp = document.getElementsByTagName('aside')[0];
+
+      // temp.innerHTML = '';
+      // temp.classList.remove('showpanel');
+
+      setTimeout(function() {
+        window.iframely && window.iframely.load();
+      }, 10);
+    }
+
+    function showPanel(event) {
+
+      var temp = document.getElementsByTagName('aside')[0];
+
+      let metaData, string;
+      if (metaData = event.metaData) {
+
+
+        if (event.link) {
+
+          string = `<a href="${event.link}"><h1>${event.title}</h1></a>`;
+        } else {
+            string = `<h1>${event.title}</h1>`;
+        }
+
+
+        metaData.description && (string = string + `<h2>${metaData.description.substring(0,300)}</h2>`);
+
+        let authorUrl = metaData.author_url ? `<span><a href="${metaData.author_url}">Visit</a></span>` : '';
+
+        if (metaData.author_url ) {
+
+          string = string + `<a href="${metaData.author_url}"><p><span class="author">Author</span>: ${metaData.author}</p></a>`;
+
+        } else {
+          string = string + `<p>Author: ${metaData.author}</p>`;
+        }
+
+
+        event.iframe && (string = string + event.iframe);
+      }
+
+      temp.innerHTML = string;
+
+      temp.classList.add('showpanel');
+
+      setTimeout(function() {
+        window.iframely && window.iframely.load();
+      }, 10);
+    }
 
 
     // Image

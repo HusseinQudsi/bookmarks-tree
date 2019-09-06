@@ -366,12 +366,12 @@
 
         let authorUrl = metaData.author_url ? `<span><a href="${metaData.author_url}">Visit</a></span>` : '';
 
-        if (metaData.author_url ) {
+        if (metaData.author_url && metaData.author) {
 
           string = string + `<a href="${metaData.author_url}"><p><span class="author">Author</span>: ${metaData.author}</p></a>`;
 
         } else {
-          string = string + `<p>Author: ${metaData.author}</p>`;
+          metaData.author && (string = string + `<p>Author: ${metaData.author}</p>`);
         }
 
 

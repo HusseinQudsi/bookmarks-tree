@@ -94,13 +94,136 @@
   g g:hover {
     fill: #3c8ed2;
   }
+
+.load {
+  display: none;
+}
+
+  /* Loading animation */
+  /* Absolute Center Spinner */
+.loading {
+  display: block;
+  position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: visible;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/* Transparent Overlay */
+.loading:before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.3);
+}
+
+  /* :not(:required) hides these rules from IE9 and below */
+  .loading:not(:required) {
+    /* hide "loading..." text */
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+  }
+  .loading:not(:required):after {
+    content: '';
+    display: block;
+    font-size: 10px;
+    width: 1em;
+    height: 1em;
+    margin-top: -0.5em;
+    -webkit-animation: spinner 1500ms infinite linear;
+    -moz-animation: spinner 1500ms infinite linear;
+    -ms-animation: spinner 1500ms infinite linear;
+    -o-animation: spinner 1500ms infinite linear;
+    animation: spinner 1500ms infinite linear;
+    border-radius: 0.5em;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0, rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+    box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) -1.5em 0 0 0, rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+  }
+  /* Animation */
+  @-webkit-keyframes spinner {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @-moz-keyframes spinner {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @-o-keyframes spinner {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes spinner {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
   </style>
 </head>
 
 <body>
   <main>
+    <div class="load">Loading&#8230;</div>
     <section></section>
-
     <aside class="showpanel">
       <p>hello</p>
     </aside>
@@ -202,10 +325,9 @@
 
   var jsonUrl = location.search && location.search.replace('?json=', '') || JSON.stringify(placeHolder);
   var treeData = JSON.parse(decodeURI(jsonUrl));
-
-  let promiseArray = [];
-  let favicon = 'https://favicongrabber.com/api/grab/';
-  let iframelyApi = 'https://iframe.ly/api/oembed?url=';
+  var promiseArray = [];
+  var favicon = 'https://favicongrabber.com/api/grab/';
+  var iframelyApi = 'https://iframe.ly/api/oembed?url=';
 
   function generateUrl(item) {
     return new Promise(function(resolve, reject) {
@@ -214,18 +336,18 @@
         return 'javascript:void(0)';
       }
 
-      let urlString = new URL(item.link);
-      let iframeUrl = `${iframelyApi}${encodeURIComponent(item.link)}&api_key=cbce8adc63c693fc118a5d`;
-      let url = `${favicon}${(urlString.hostname || urlString.host || '').replace(/www\./i, '')}`;
-      let fetchComplete = false;
+      var urlString = new URL(item.link);
+      var iframeUrl = `${iframelyApi}${encodeURIComponent(item.link)}&api_key=cbce8adc63c693fc118a5d`;
+      var url = `${favicon}${(urlString.hostname || urlString.host || '').replace(/www\./i, '')}`;
+      var fetchComplete = false;
 
       // Fetching Favicon
       fetch(url)
       .then(function(response) { return response.json(); })
       .then(function(myJson) {
 
-        let data = myJson && myJson.icons && myJson.icons.length && (myJson.icons || [])[2] || (myJson.icons|| [])[1] || (myJson.icons || [])[0];
-        let src = data ? data.src : null;
+        var data = myJson && myJson.icons && myJson.icons.length && (myJson.icons || [])[2] || (myJson.icons|| [])[1] || (myJson.icons || [])[0];
+        var src = data ? data.src : null;
 
         item.favicon = src;
 
@@ -271,16 +393,8 @@
 
   function enrichJson(data) {
 
-    data.children.forEach(function (item) {
-
-      if (item.children) {
-
-        return enrichJson(item);
-
-      } else {
-
-        item.link && promiseArray.push(generateUrl(item));
-      }
+    (data.children || data._children).forEach(function (item) {
+      !item.children && item.link && promiseArray.push(generateUrl(item));
     });
   }
   enrichJson(treeData[0]);
@@ -345,21 +459,8 @@
     var nodeEnter = node.enter().append("g")
     .attr("class", "node")
     .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-    // .on("mouseleave", hidePanel)
     .on("mouseover", showPanel)
     .on("click", click);
-
-    // function hidePanel(event) {
-    //
-    //   // var temp = document.getElementsByTagName('aside')[0];
-    //   //
-    //   // temp.innerHTML = '';
-    //   // temp.classList.remove('showpanel');
-    //
-    //   setTimeout(function() {
-    //     window.iframely && window.iframely.load();
-    //   }, 10);
-    // }
 
     function showPanel(event) {
 
@@ -375,7 +476,7 @@
 
       var temp = document.getElementsByTagName('aside')[0];
 
-      let metaData, string;
+      var metaData, string;
       if (metaData = event.metaData) {
 
 
@@ -386,10 +487,9 @@
             string = `<h1>${event.title}</h1>`;
         }
 
+        metaData.description && (string = string + `<h2>${metaData.description.substring(0,350)}</h2>`);
 
-        metaData.description && (string = string + `<h2>${metaData.description.substring(0,300)}</h2>`);
-
-        let authorUrl = metaData.author_url ? `<span><a href="${metaData.author_url}">Visit</a></span>` : '';
+        var authorUrl = metaData.author_url ? `<span><a href="${metaData.author_url}">Visit</a></span>` : '';
 
         if (metaData.author_url && metaData.author) {
 
@@ -493,22 +593,47 @@
     });
   }
 
-  // Toggle children on click.
   function click(d) {
 
-    if (d.link) {
-      window.open(d.link,'_blank');
-      return ;
+    if (!d.children && !!d.folder) {
+
+      var $loading = document.getElementsByClassName('load')[0];
+      $loading.classList.add('loading');
+
+      promiseArray = [];
+
+      enrichJson(d);
+
+      Promise
+        .all(promiseArray)
+        .then(function(data) {
+
+          $loading.classList.remove('loading');
+          redraw();
+        })
+        .catch(function (error) { console.error(error) });
+
+    } else {
+
+      redraw();
     }
 
-    if (d.children) {
-      d._children = d.children;
-      d.children = null;
-    } else {
-      d.children = d._children;
-      d._children = null;
+    function redraw() {
+
+      if (d.link) {
+        window.open(d.link,'_blank');
+        return ;
+      }
+
+      if (d.children) {
+        d._children = d.children;
+        d.children = null;
+      } else {
+        d.children = d._children;
+        d._children = null;
+      }
+      update(d);
     }
-    update(d);
   }
 </script>
 

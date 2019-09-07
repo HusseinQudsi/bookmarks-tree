@@ -61,10 +61,6 @@
     padding: 10px 10px 0 10px;
     margin: 0;
   }
-  aside a h1 {
-    /* padding: 10px 10px 0 10px;
-    margin: 0; */
-  }
   aside h2 {
     font-size: 16px;
     padding: 0 10px 10px 10px;
@@ -95,7 +91,9 @@
   .author {
     color: initial !important;
   }
-
+  g g:hover {
+    fill: #3c8ed2;
+  }
   </style>
 </head>
 
@@ -155,9 +153,25 @@
         {
           "folder": "Mix",
           "children": [
-            {
-              "link": "https://main.dailyflix.stream"
-            },
+          {
+            "folder": "JSON Tools",
+            "children": [
+              {
+                "link": "https://zeit.co/dashboard"
+              },
+              {
+                "folder": "JSON Tools",
+                "children": [
+                  {
+                    "link": "https://zeit.co/dashboard"
+                  },
+                  {
+                    "link": "https://analytics.google.com/analytics/web/"
+                  }
+                ]
+              }
+            ]
+          },
             {
               "link": "https://www.ffmovies.to/genre/action"
             },
@@ -330,23 +344,33 @@
     var nodeEnter = node.enter().append("g")
     .attr("class", "node")
     .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-    .on("mouseleave", hidePanel)
+    // .on("mouseleave", hidePanel)
     .on("mouseover", showPanel)
     .on("click", click);
 
-    function hidePanel(event) {
-
-      var temp = document.getElementsByTagName('aside')[0];
-
-      // temp.innerHTML = '';
-      // temp.classList.remove('showpanel');
-
-      setTimeout(function() {
-        window.iframely && window.iframely.load();
-      }, 10);
-    }
+    // function hidePanel(event) {
+    //
+    //   // var temp = document.getElementsByTagName('aside')[0];
+    //   //
+    //   // temp.innerHTML = '';
+    //   // temp.classList.remove('showpanel');
+    //
+    //   setTimeout(function() {
+    //     window.iframely && window.iframely.load();
+    //   }, 10);
+    // }
 
     function showPanel(event) {
+
+      if (event.folder) {
+
+        var temp = document.getElementsByTagName('aside')[0];
+
+        temp.innerHTML = '';
+        temp.classList.remove('showpanel');
+
+        return;
+      }
 
       var temp = document.getElementsByTagName('aside')[0];
 

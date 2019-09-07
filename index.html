@@ -1,642 +1,228 @@
 <!--
   DEV: Hussein Q.
-  CreatedOn: 09/15/2019
+  CreatedOn: 10/15/2019
   Contact / feedback: hussein8844@gmail.com
   GitHub: https://github.com/hussein8844
-  Purpose: A nice way to represent JSON Data in powerpoint representations etc.
+  Purpose: Sharing Technical Resources
 -->
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="author" content="Hussein Q.">
-  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'"> -->
   <meta name="bookmark-tree" value="notranslate">
   <meta name="referrer" content="strict-origin">
   <title>Tree Example</title>
   <style>
+    body {
+      font-family: "Galaxie",Georgia,Helvetica,Arial,serif;
+      font-size: 16px;
+      line-height: 2;
+      color: #444;
+      min-width: 1200px;
+    }
+    .node {
+      cursor: pointer;
+    }
+    .node circle {
+      fill: #fff;
+      stroke: steelblue;
+      stroke-width: 3px;
+    }
+    .node text {
+      font: 12px sans-serif;
+    }
+    .link {
+      fill: none;
+      stroke: #ccc;
+      stroke-width: 2px;
+    }
+    section {
+      width: 70%;
+      float: left;
+      overflow: scroll;
+    }
+    aside {
+      width: 400px;
+      position: absolute;
+      right: 0;
+      height: 100vh;
+      opacity: 0;
+      transition: opacity .5s cubic-bezier(0.55, 0.09, 0.68, 0.53);
+      z-index: -1;
+      overflow: scroll;
+      background-image: linear-gradient(30deg, #dfe3e8 25%, #cfdde6 25%, #cfdde6 50%, #dfe3e8 50%, #dfe3e8 75%, #cfdde6 75%, #cfdde6 100%);
+    }
+    aside h1 {
+      font-size: 18px;
+      font-weight: 400;
+      word-break: break-word;
+      padding: 10px 10px 0 10px;
+      margin: 0;
+    }
+    aside h2 {
+      font-size: 16px;
+      padding: 0 10px 10px 10px;
+      font-weight: 400;
+      word-break: break-word;
+    }
+    aside a {
+      text-decoration: none;
+      color: #3c8ed2;
+      padding: 5px;
+      display: block;
+    }
+    aside a:hover {
+      color: cornflowerblue;
+    }
+    aside p {
+      padding: 5px;
+      margin: 0;
+    }
+    aside p {
+      padding: 5px;
+      margin: 0;
+    }
+    .showpanel {
+      opacity: 1;
+      z-index: 999;
+    }
+    .author {
+      color: initial !important;
+    }
+    g g:hover {
+      fill: #3c8ed2;
+    }
+    .load {
+      display: none;
+    }
 
-  body {
-    font-family: "Galaxie",Georgia,Helvetica,Arial,serif;
-    font-size: 16px;
-    line-height: 2;
-    color: #444;
-    min-width: 1200px;
-  }
-  .node {
-    cursor: pointer;
-  }
-  .node circle {
-    fill: #fff;
-    stroke: steelblue;
-    stroke-width: 3px;
-  }
-  .node text {
-    font: 12px sans-serif;
-  }
-  .link {
-    fill: none;
-    stroke: #ccc;
-    stroke-width: 2px;
-  }
-  section {
-    width: 70%;
-    float: left;
-    overflow: scroll;
-  }
-  aside {
-    width: 400px;
-    position: absolute;
-    right: 0;
-    height: 100vh;
-    opacity: 0;
-    transition: opacity .5s cubic-bezier(0.55, 0.09, 0.68, 0.53);
-    z-index: -1;
-    overflow: scroll;
-    background-image: linear-gradient(30deg, #dfe3e8 25%, #cfdde6 25%, #cfdde6 50%, #dfe3e8 50%, #dfe3e8 75%, #cfdde6 75%, #cfdde6 100%);
-  }
-  aside h1 {
-    font-size: 18px;
-    font-weight: 400;
-    word-break: break-word;
-    padding: 10px 10px 0 10px;
-    margin: 0;
-  }
-  aside h2 {
-    font-size: 16px;
-    padding: 0 10px 10px 10px;
-    font-weight: 400;
-    word-break: break-word;
-  }
-  aside a {
-    text-decoration: none;
-    color: #3c8ed2;
-    padding: 5px;
-    display: block;
-  }
-  aside a:hover {
-    color: cornflowerblue;
-  }
-  aside p {
-    padding: 5px;
-    margin: 0;
-  }
-  aside p {
-    padding: 5px;
-    margin: 0;
-  }
-  .showpanel {
-    opacity: 1;
-    z-index: 999;
-  }
-  .author {
-    color: initial !important;
-  }
-  g g:hover {
-    fill: #3c8ed2;
-  }
-
-.load {
-  display: none;
-}
-
-  /* Loading animation */
-  /* Absolute Center Spinner */
-.loading {
-  display: block;
-  position: fixed;
-  z-index: 999;
-  height: 2em;
-  width: 2em;
-  overflow: visible;
-  margin: auto;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
-
-/* Transparent Overlay */
-.loading:before {
-  content: '';
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.3);
-}
-
-  /* :not(:required) hides these rules from IE9 and below */
-  .loading:not(:required) {
-    /* hide "loading..." text */
-    font: 0/0 a;
-    color: transparent;
-    text-shadow: none;
-    background-color: transparent;
-    border: 0;
-  }
-  .loading:not(:required):after {
-    content: '';
-    display: block;
-    font-size: 10px;
-    width: 1em;
-    height: 1em;
-    margin-top: -0.5em;
-    -webkit-animation: spinner 1500ms infinite linear;
-    -moz-animation: spinner 1500ms infinite linear;
-    -ms-animation: spinner 1500ms infinite linear;
-    -o-animation: spinner 1500ms infinite linear;
-    animation: spinner 1500ms infinite linear;
-    border-radius: 0.5em;
-    -webkit-box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0, rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
-    box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) -1.5em 0 0 0, rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
-  }
-  /* Animation */
-  @-webkit-keyframes spinner {
-    0% {
-      -webkit-transform: rotate(0deg);
-      -moz-transform: rotate(0deg);
-      -ms-transform: rotate(0deg);
-      -o-transform: rotate(0deg);
-      transform: rotate(0deg);
+    /* Loading animation */
+    .loading {
+      display: block;
+      position: fixed;
+      z-index: 999;
+      height: 2em;
+      width: 2em;
+      overflow: visible;
+      margin: auto;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
     }
-    100% {
-      -webkit-transform: rotate(360deg);
-      -moz-transform: rotate(360deg);
-      -ms-transform: rotate(360deg);
-      -o-transform: rotate(360deg);
-      transform: rotate(360deg);
+    .loading:before {
+      content: '';
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.3);
     }
-  }
-  @-moz-keyframes spinner {
-    0% {
-      -webkit-transform: rotate(0deg);
-      -moz-transform: rotate(0deg);
-      -ms-transform: rotate(0deg);
-      -o-transform: rotate(0deg);
-      transform: rotate(0deg);
+    .loading:not(:required) {
+      /* hide "loading..." text */
+      font: 0/0 a;
+      color: transparent;
+      text-shadow: none;
+      background-color: transparent;
+      border: 0;
     }
-    100% {
-      -webkit-transform: rotate(360deg);
-      -moz-transform: rotate(360deg);
-      -ms-transform: rotate(360deg);
-      -o-transform: rotate(360deg);
-      transform: rotate(360deg);
+    .loading:not(:required):after {
+      content: '';
+      display: block;
+      font-size: 10px;
+      width: 1em;
+      height: 1em;
+      margin-top: -0.5em;
+      -webkit-animation: spinner 1500ms infinite linear;
+      -moz-animation: spinner 1500ms infinite linear;
+      -ms-animation: spinner 1500ms infinite linear;
+      -o-animation: spinner 1500ms infinite linear;
+      animation: spinner 1500ms infinite linear;
+      border-radius: 0.5em;
+      -webkit-box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0, rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+      box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) -1.5em 0 0 0, rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
     }
-  }
-  @-o-keyframes spinner {
-    0% {
-      -webkit-transform: rotate(0deg);
-      -moz-transform: rotate(0deg);
-      -ms-transform: rotate(0deg);
-      -o-transform: rotate(0deg);
-      transform: rotate(0deg);
+    @-webkit-keyframes spinner {
+      0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
     }
-    100% {
-      -webkit-transform: rotate(360deg);
-      -moz-transform: rotate(360deg);
-      -ms-transform: rotate(360deg);
-      -o-transform: rotate(360deg);
-      transform: rotate(360deg);
+    @-moz-keyframes spinner {
+      0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
     }
-  }
-  @keyframes spinner {
-    0% {
-      -webkit-transform: rotate(0deg);
-      -moz-transform: rotate(0deg);
-      -ms-transform: rotate(0deg);
-      -o-transform: rotate(0deg);
-      transform: rotate(0deg);
+    @-o-keyframes spinner {
+      0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
     }
-    100% {
-      -webkit-transform: rotate(360deg);
-      -moz-transform: rotate(360deg);
-      -ms-transform: rotate(360deg);
-      -o-transform: rotate(360deg);
-      transform: rotate(360deg);
+    @keyframes spinner {
+      0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
     }
-  }
   </style>
 </head>
 
 <body>
   <main>
-    <div class="load">Loading&#8230;</div>
+    <div class="load"></div>
     <section></section>
-    <aside class="showpanel">
-      <p>hello</p>
-    </aside>
-
+    <aside></aside>
   </main>
   <script src="https://d3js.org/d3.v3.min.js"></script>
   <script async="" src="https://cdn.iframe.ly/embed.js" charset="utf-8"></script>
   <script>
-
-  var placeHolder = [
-
-    {
-      "folder": "Developer",
-      "children": [
-        {
-          "link": "https://www.youtube.com/watch?v=0cB4D65vsIQ&list=PL6cactdCCnTK7Su3WF--4jZdd5K-vk_78"
-        },
-        {
-          "link": "https://www.youtube.com/watch?v=IhJGJG-9Dx8&list=PLI1t_8YX-Apv-UiRlnZwqqrRT8D1RhriX"
-        },
-        {
-          "folder": "CSS / UX",
-          "children": [
-            {
-              "link": "http://colorlisa.com/"
-            },
-            {
-              "link": "https://www.youtube.com/watch?v=br-0i3U1VCA"
-            }
-          ]
-        },
-        {
-          "folder": "JSON Tools",
-          "children": [
-            {
-              "link": "https://www.json-generator.com/"
-            }
-          ]
-        },
-        {
-          "folder": "JSON Tools",
-          "children": [
-            {
-              "link": "https://zeit.co/dashboard"
-            },
-            {
-              "link": "https://analytics.google.com/analytics/web/"
-            }
-          ]
-        },
-        {
-          "folder": "Mix",
-          "children": [
-          {
-            "folder": "JSON Tools",
-            "children": [
-              {
-                "link": "https://zeit.co/dashboard"
-              },
-              {
-                "folder": "JSON Tools",
-                "children": [
-                  {
-                    "link": "https://zeit.co/dashboard"
-                  },
-                  {
-                    "link": "https://analytics.google.com/analytics/web/"
-                  }
-                ]
-              }
-            ]
-          },
-            {
-              "link": "https://www.ffmovies.to/genre/action"
-            },
-            {
-              "link": "https://www.crunchyroll.com"
-            },
-            {
-              "link": "https://www.gogoanime1.com"
-            },
-            {
-              "link": "https://teamtreehouse.com/library/regular-expressions-in-javascript"
-            },
-            {
-              "link": "https://www.w3schools.com/html/"
-            },
-            {
-              "link": "https://www.lynda.com/javascript-training-tutorials/244-0.html"
-            },
-            {
-              "link": "https://www.pluralsight.com/courses/nodejs-big-picture"
-            }
-          ]
-        }
-      ]
-    }
-  ];
-
-  var jsonUrl = location.search && location.search.replace('?json=', '') || JSON.stringify(placeHolder);
-  var treeData = JSON.parse(decodeURI(jsonUrl));
-  var promiseArray = [];
-  var favicon = 'https://favicongrabber.com/api/grab/';
-  var iframelyApi = 'https://iframe.ly/api/oembed?url=';
-
-  function generateUrl(item) {
-    return new Promise(function(resolve, reject) {
-
-      if (typeof item.link !== 'string') {
-        return 'javascript:void(0)';
-      }
-
-      var urlString = new URL(item.link);
-      var iframeUrl = `${iframelyApi}${encodeURIComponent(item.link)}&api_key=cbce8adc63c693fc118a5d`;
-      var url = `${favicon}${(urlString.hostname || urlString.host || '').replace(/www\./i, '')}`;
-      var fetchComplete = false;
-
-      // Fetching Favicon
-      fetch(url)
-      .then(function(response) { return response.json(); })
-      .then(function(myJson) {
-
-        var data = myJson && myJson.icons && myJson.icons.length && (myJson.icons || [])[2] || (myJson.icons|| [])[1] || (myJson.icons || [])[0];
-        var src = data ? data.src : null;
-
-        item.favicon = src;
-
-        if (fetchComplete) {
-
-          resolve();
-        } else {
-
-          fetchComplete = true;
-        }
-
-      }).catch(function (error) { debugger; });
-
-      // Fetching Title
-      fetch(iframeUrl)
-      .then(function(response) { return response.json(); })
-      .then(function(myJson) {
-
-        if (myJson.status > 400) {
-
-          item.title = urlString.hostname || urlString.host;
-          item.iframe = null;
-
-        } else {
-
-          item.title = myJson.title;
-          item.iframe = myJson.html;
-          item.metaData = myJson;
-        }
-
-
-        if (fetchComplete) {
-
-          resolve();
-        } else {
-
-          fetchComplete = true;
-        }
-
-      }).catch(function (error) { debugger; });
-    });
-  }
-
-  function enrichJson(data) {
-
-    (data.children || data._children).forEach(function (item) {
-      !item.children && item.link && promiseArray.push(generateUrl(item));
-    });
-  }
-  enrichJson(treeData[0]);
-
-  Promise.all(promiseArray)
-  .then(function(data) {
-    update(root);
-  })
-  .catch(function (error) { debugger; });
-
-  // ************** Generate the tree diagram	 *****************
-  var margin = {top: 0, right: 160, bottom: 0, left: 160},
-  width = (window.innerWidth - margin.right - margin.left),
-  height = (window.innerHeight - margin.top - margin.bottom);
-
-  var i = 0,
-  duration = 750,
-  root;
-
-  var tree = d3.layout.tree().size([height, width]);
-
-
-  var diagonal = d3.svg.diagonal()
-  .projection(function(d) { return [d.y, d.x]; });
-
-  var svg = d3.select("section").append("svg")
-  .attr("width", width + margin.right + margin.left)
-  .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-  root = treeData[0];
-  root.x0 = height / 2;
-  root.y0 = 0;
-
-  // TODO collapse only if links (expand folders)
-  root.children.forEach(collapse);
-  function collapse(d) {
-    if(d.children) {
-      d._children = d.children
-      d._children.forEach(collapse)
-      d.children = null
-    }
-  }
-
-
-  d3.select(self.frameElement).style("height", "500px");
-
-  function update(source) {
-
-    // Compute the new tree layout.
-    var nodes = tree.nodes(root).reverse(),
-    links = tree.links(nodes);
-
-    // Normalize for fixed-depth.
-    nodes.forEach(function(d) { d.y = d.depth * 180; });
-
-    // Update the nodes…
-    var node = svg.selectAll("g.node").data(nodes, function(d) { return d.id || (d.id = ++i); });
-
-    // Enter any new nodes at the parent's previous position.
-    var nodeEnter = node.enter().append("g")
-    .attr("class", "node")
-    .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-    .on("mouseover", showPanel)
-    .on("click", click);
-
-    function showPanel(event) {
-
-      if (event.folder) {
-
-        var temp = document.getElementsByTagName('aside')[0];
-
-        temp.innerHTML = '';
-        temp.classList.remove('showpanel');
-
-        return;
-      }
-
-      var temp = document.getElementsByTagName('aside')[0];
-
-      var metaData, string;
-      if (metaData = event.metaData) {
-
-
-        if (event.link) {
-
-          string = `<a href="${event.link}"><h1>${event.title}</h1></a>`;
-        } else {
-            string = `<h1>${event.title}</h1>`;
-        }
-
-        metaData.description && (string = string + `<h2>${metaData.description.substring(0,350)}</h2>`);
-
-        var authorUrl = metaData.author_url ? `<span><a href="${metaData.author_url}">Visit</a></span>` : '';
-
-        if (metaData.author_url && metaData.author) {
-
-          string = string + `<a href="${metaData.author_url}"><p><span class="author">Author</span>: ${metaData.author}</p></a>`;
-
-        } else {
-          metaData.author && (string = string + `<p>Author: ${metaData.author}</p>`);
-        }
-
-
-        event.iframe && (string = string + event.iframe);
-      }
-
-      temp.innerHTML = string;
-
-      temp.classList.add('showpanel');
-
-      setTimeout(function() {
-        window.iframely && window.iframely.load();
-      }, 10);
-    }
-
-
-    // Image
-    nodeEnter
-    .filter(function(item) { return item.link && item.favicon; })
-    .append("image")
-    .attr("y", "5")
-    .attr("x", "2")
-    .attr("href", function(i) { return i.favicon; })
-    .attr("width", "50")
-    .attr("height", "50");
-
-    // Text
-    nodeEnter
-    .filter(function(item) { return !item.link; })
-    .append("circle")
-    .attr("r", 1e-6)
-    .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
-
-    nodeEnter.append("text")
-    .attr("x", function(d) { return d.children || d._children ? -20 : 5; })
-    .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-    .text(function(d) { return d.folder || d.title; })
-    .style("fill-opacity", 1e-6);
-
-    // Transition nodes to their new position.
-    var nodeUpdate = node.transition()
-    .duration(duration)
-    .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
-
-    nodeUpdate.select("circle")
-    .attr("r", 10)
-    .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
-
-    nodeUpdate.select("text")
-    .style("fill-opacity", 1);
-
-    // Transition exiting nodes to the parent's new position.
-    var nodeExit = node.exit().transition()
-    .duration(duration)
-    .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
-    .remove();
-
-    nodeExit.select("circle")
-    .attr("r", 1e-6);
-
-    nodeExit.select("text")
-    .style("fill-opacity", 1e-6);
-
-    // Update the links…
-    var link = svg.selectAll("path.link")
-    .data(links, function(d) { return d.target.id; });
-
-    // Enter any new links at the parent's previous position.
-    link.enter().insert("path", "g")
-    .attr("class", "link")
-    .attr("d", function(d) {
-      var o = {x: source.x0, y: source.y0};
-      return diagonal({source: o, target: o});
-    });
-
-    // Transition links to their new position.
-    link.transition()
-    .duration(duration)
-    .attr("d", diagonal);
-
-    // Transition exiting nodes to the parent's new position.
-    link.exit().transition()
-    .duration(duration)
-    .attr("d", function(d) {
-      var o = {x: source.x, y: source.y};
-      return diagonal({source: o, target: o});
-    })
-    .remove();
-
-    // Stash the old positions for transition.
-    nodes.forEach(function(d) {
-      d.x0 = d.x;
-      d.y0 = d.y;
-    });
-  }
-
-  function click(d) {
-
-    if (!d.children && !!d.folder) {
-
-      var $loading = document.getElementsByClassName('load')[0];
-      $loading.classList.add('loading');
-
-      promiseArray = [];
-
-      enrichJson(d);
-
-      Promise
-        .all(promiseArray)
-        .then(function(data) {
-
-          $loading.classList.remove('loading');
-          redraw();
-        })
-        .catch(function (error) { console.error(error) });
-
-    } else {
-
-      redraw();
-    }
-
-    function redraw() {
-
-      if (d.link) {
-        window.open(d.link,'_blank');
-        return ;
-      }
-
-      if (d.children) {
-        d._children = d.children;
-        d.children = null;
-      } else {
-        d.children = d._children;
-        d._children = null;
-      }
-      update(d);
-    }
-  }
-</script>
-
-
+    (function() {
+      var placeHolder=[{folder:"Developer",children:[{link:"https://www.youtube.com/watch?v=0cB4D65vsIQ&list=PL6cactdCCnTK7Su3WF--4jZdd5K-vk_78"},{link:"https://www.youtube.com/watch?v=IhJGJG-9Dx8&list=PLI1t_8YX-Apv-UiRlnZwqqrRT8D1RhriX"},{folder:"CSS / UX",children:[{link:"http://colorlisa.com/"},{link:"https://www.youtube.com/watch?v=br-0i3U1VCA"}]},{folder:"JSON Tools",children:[{link:"https://www.json-generator.com/"}]},{folder:"JSON Tools",children:[{link:"https://zeit.co/dashboard"},{link:"https://analytics.google.com/analytics/web/"}]},{folder:"Mix",children:[{folder:"JSON Tools",children:[{link:"https://zeit.co/dashboard"},{folder:"JSON Tools",children:[{link:"https://zeit.co/dashboard"},{link:"https://analytics.google.com/analytics/web/"}]}]},{link:"https://www.ffmovies.to/genre/action"},{link:"https://www.crunchyroll.com"},{link:"https://www.gogoanime1.com"},{link:"https://teamtreehouse.com/library/regular-expressions-in-javascript"},{link:"https://www.w3schools.com/html/"},{link:"https://www.lynda.com/javascript-training-tutorials/244-0.html"},{link:"https://www.pluralsight.com/courses/nodejs-big-picture"}]}]}],jsonUrl=location.search&&location.search.replace("?json=","")||JSON.stringify(placeHolder),treeData=JSON.parse(decodeURI(jsonUrl)),promiseArray=[],favicon="https://favicongrabber.com/api/grab/",iframelyApi="https://iframe.ly/api/oembed?url=";function generateUrl(t){return new Promise(function(e,n){if("string"!=typeof t.link)return"javascript:void(0)";var r=new URL(t.link),i=`${iframelyApi}${encodeURIComponent(t.link)}&api_key=cbce8adc63c693fc118a5d`,o=`${favicon}${(r.hostname||r.host||"").replace(/www\./i,"")}`,a=!1;fetch(o).then(function(t){return t.json()}).then(function(n){var r=n&&n.icons&&n.icons.length&&(n.icons||[])[2]||(n.icons||[])[1]||(n.icons||[])[0],i=r?r.src:null;t.favicon=i,a?e():a=!0}).catch(function(t){console.error(t),a?e():a=!0}),fetch(i).then(function(t){return t.json()}).then(function(n){n.status>400?(t.title=r.hostname||r.host,t.iframe=null):(t.title=n.title,t.iframe=n.html,t.metaData=n),a?e():a=!0}).catch(function(t){console.error(t),a?e():a=!0})})}function enrichJson(t){(t.children||t._children).forEach(function(t){!t.children&&t.link&&promiseArray.push(generateUrl(t))})}enrichJson(treeData[0]),Promise.all(promiseArray).then(function(t){update(root)}).catch(function(t){});var root,margin={top:0,right:160,bottom:0,left:160},width=window.innerWidth-margin.right-margin.left,height=window.innerHeight-margin.top-margin.bottom,i=0,duration=750,tree=d3.layout.tree().size([height,width]),diagonal=d3.svg.diagonal().projection(function(t){return[t.y,t.x]}),svg=d3.select("section").append("svg").attr("width",width+margin.right+margin.left).attr("height",height+margin.top+margin.bottom).append("g").attr("transform","translate("+margin.left+","+margin.top+")");function collapse(t){t.children&&(t._children=t.children,t._children.forEach(collapse),t.children=null)}function update(t){var e=tree.nodes(root).reverse(),n=tree.links(e);e.forEach(function(t){t.y=180*t.depth});var r=svg.selectAll("g.node").data(e,function(t){return t.id||(t.id=++i)}),o=r.enter().append("g").attr("class","node").attr("transform",function(e){return"translate("+t.y0+","+t.x0+")"}).on("mouseover",function(t){if(t.folder){var e=document.getElementsByTagName("aside")[0];return e.innerHTML="",void e.classList.remove("showpanel")}var n,r,e=document.getElementsByTagName("aside")[0];if(n=t.metaData){r=t.link?`<a href="${t.link}"><h1>${t.title}</h1></a>`:`<h1>${t.title}</h1>`,n.description&&(r+=`<h2>${n.description.substring(0,350)}</h2>`);n.author_url&&n.author_url;n.author_url&&n.author?r+=`<a href="${n.author_url}"><p><span class="author">Author</span>: ${n.author}</p></a>`:n.author&&(r+=`<p>Author: ${n.author}</p>`),t.iframe&&(r+=t.iframe)}e.innerHTML=r,e.classList.add("showpanel"),setTimeout(function(){window.iframely&&window.iframely.load()},10)}).on("click",click);o.filter(function(t){return t.link&&t.favicon}).append("image").attr("y","5").attr("x","2").attr("href",function(t){return t.favicon}).attr("width","50").attr("height","50"),o.filter(function(t){return!t.link}).append("circle").attr("r",1e-6).style("fill",function(t){return t._children?"lightsteelblue":"#fff"}),o.append("text").attr("x",function(t){return t.children||t._children?-20:5}).attr("text-anchor",function(t){return t.children||t._children?"end":"start"}).text(function(t){return t.folder||t.title}).style("fill-opacity",1e-6);var a=r.transition().duration(duration).attr("transform",function(t){return"translate("+t.y+","+t.x+")"});a.select("circle").attr("r",10).style("fill",function(t){return t._children?"lightsteelblue":"#fff"}),a.select("text").style("fill-opacity",1);var l=r.exit().transition().duration(duration).attr("transform",function(e){return"translate("+t.y+","+t.x+")"}).remove();l.select("circle").attr("r",1e-6),l.select("text").style("fill-opacity",1e-6);var c=svg.selectAll("path.link").data(n,function(t){return t.target.id});c.enter().insert("path","g").attr("class","link").attr("d",function(e){var n={x:t.x0,y:t.y0};return diagonal({source:n,target:n})}),c.transition().duration(duration).attr("d",diagonal),c.exit().transition().duration(duration).attr("d",function(e){var n={x:t.x,y:t.y};return diagonal({source:n,target:n})}).remove(),e.forEach(function(t){t.x0=t.x,t.y0=t.y})}function click(t){if(!t.children&&t.folder){var e=document.getElementsByClassName("load")[0];e.classList.add("loading"),promiseArray=[],enrichJson(t),Promise.all(promiseArray).then(function(t){e.classList.remove("loading"),n()}).catch(function(t){console.error(t)})}else n();function n(){t.link?window.open(t.link,"_blank"):(t.children?(t._children=t.children,t.children=null):(t.children=t._children,t._children=null),update(t))}}(root=treeData[0]).x0=height/2,root.y0=0,root.children.forEach(collapse),d3.select(self.frameElement).style("height","500px");
+    })();
+  </script>
 </body>
 </html>

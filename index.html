@@ -38,15 +38,15 @@
     stroke: #ccc;
     stroke-width: 2px;
   }
-  main {
-    display: flex;
-    flex-direction: row-reverse;
+  section {
+    width: 70%;
+    float: left;
+    overflow: scroll;
   }
-
   aside {
-    width: 300px;
-    /* background-color: lightblue; */
+    width: 30vw;
     position: absolute;
+    right: 0;
     height: 100vh;
     opacity: 0;
     transition: opacity .5s cubic-bezier(0.55, 0.09, 0.68, 0.53);
@@ -99,11 +99,12 @@
 
 <body>
   <main>
+    <section></section>
+
     <aside class="showpanel">
       <p>hello</p>
     </aside>
-    <section>
-    </section>
+
   </main>
   <script src="https://d3js.org/d3.v3.min.js"></script>
   <script async="" src="https://cdn.iframe.ly/embed.js" charset="utf-8"></script>
@@ -292,8 +293,8 @@
 
   // ************** Generate the tree diagram	 *****************
   var margin = {top: 0, right: 160, bottom: 0, left: 160},
-  width = window.innerWidth - margin.right - margin.left,
-  height = window.innerHeight - margin.top - margin.bottom;
+  width = (window.innerWidth - margin.right - margin.left),
+  height = (window.innerHeight - margin.top - margin.bottom);
 
   var i = 0,
   duration = 750,

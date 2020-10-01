@@ -273,7 +273,10 @@ Purpose: Sharing Technical Skill Sets
     (function (placeHolder) {
       "use strict";
 
-      var jsonUrl = location.search && location.search.replace('?json=', '') || JSON.stringify(placeHolder);
+      // TODO: remove this when you have to make this list dynamic
+      // var jsonUrl = location.search && location.search.replace('?json=', '') || JSON.stringify(placeHolder);
+
+      var jsonUrl = JSON.stringify(placeHolder); 
       var treeData = JSON.parse(decodeURIComponent(jsonUrl));
       var promiseArray = [];
       var favicon = 'https://favicongrabber.com/api/grab/';

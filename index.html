@@ -1,57 +1,61 @@
 <!--
-DEV: Hussein Q.
-CreatedOn: 10/15/2019
-Contact / feedback: hussein8844@gmail.com
-GitHub: https://github.com/hussein8844
-Purpose: Sharing Technical Resources
+DEV: Hussein Qudsi
+updatedON: 10/01/2020
+GitHub: https://github.com/HusseinQudsi
+Purpose: Sharing Technical Skill Sets
 -->
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="author" content="Hussein Q.">
   <meta name="bookmark-tree" value="notranslate">
   <meta name="referrer" content="strict-origin">
   <title>Bookmark-Tree</title>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145836870-2"></script>
-  <script>
+  <script async>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-145836870-2');
   </script>
   <style>
     body {
-      font-family: "Galaxie",Georgia,Helvetica,Arial,serif;
+      font-family: "Galaxie", Georgia, Helvetica, Arial, serif;
       font-size: 16px;
       line-height: 2;
       color: #444;
       background: #ededed;
     }
+
     .node {
       cursor: pointer;
     }
+
     .node circle {
       fill: #fff;
       stroke: steelblue;
       stroke-width: 3px;
     }
+
     .node text {
       font-weight: 400;
-      font-family: "Galaxie",Georgia,Helvetica,Arial,serif;
+      font-family: "Galaxie", Georgia, Helvetica, Arial, serif;
       font-size: 14px;
     }
+
     .link {
       fill: none;
       stroke: #ccc;
       stroke-width: 2px;
     }
+
     section {
       width: 70%;
       float: left;
       overflow: scroll;
     }
+
     aside {
       width: 400px;
       position: absolute;
@@ -63,6 +67,7 @@ Purpose: Sharing Technical Resources
       overflow: scroll;
       background-image: linear-gradient(30deg, #dfe3e8 25%, #cfdde6 25%, #cfdde6 50%, #dfe3e8 50%, #dfe3e8 75%, #cfdde6 75%, #cfdde6 100%);
     }
+
     aside h1 {
       font-size: 18px;
       font-weight: 400;
@@ -70,42 +75,52 @@ Purpose: Sharing Technical Resources
       padding: 10px 10px 0 10px;
       margin: 0;
     }
+
     aside h2 {
       font-size: 16px;
       padding: 0 10px 10px 10px;
       font-weight: 400;
       word-break: break-word;
     }
+
     aside a {
       text-decoration: none;
       color: #3c8ed2;
       padding: 5px;
       display: block;
     }
+
     aside a:hover {
       color: cornflowerblue;
     }
+
     aside p {
       padding: 5px;
       margin: 0;
     }
+
     aside p {
       padding: 5px;
       margin: 0;
     }
+
     .showpanel {
       opacity: 1;
       z-index: 999;
     }
+
     .author {
       color: initial !important;
     }
+
     g g:hover {
       fill: #3c8ed2;
     }
+
     .load {
       display: none;
     }
+
     iframe {
       width: 97%;
       margin: auto;
@@ -134,6 +149,7 @@ Purpose: Sharing Technical Resources
       bottom: 0;
       right: 0;
     }
+
     .loading:before {
       content: '';
       display: block;
@@ -142,8 +158,9 @@ Purpose: Sharing Technical Resources
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0,0,0,0.3);
+      background-color: rgba(0, 0, 0, 0.3);
     }
+
     .loading:not(:required) {
       /* hide "loading..." text */
       font: 0/0 a;
@@ -152,6 +169,7 @@ Purpose: Sharing Technical Resources
       background-color: transparent;
       border: 0;
     }
+
     .loading:not(:required):after {
       content: '';
       display: block;
@@ -168,6 +186,7 @@ Purpose: Sharing Technical Resources
       -webkit-box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0, rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
       box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) -1.5em 0 0 0, rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
     }
+
     @-webkit-keyframes spinner {
       0% {
         -webkit-transform: rotate(0deg);
@@ -176,6 +195,7 @@ Purpose: Sharing Technical Resources
         -o-transform: rotate(0deg);
         transform: rotate(0deg);
       }
+
       100% {
         -webkit-transform: rotate(360deg);
         -moz-transform: rotate(360deg);
@@ -184,6 +204,7 @@ Purpose: Sharing Technical Resources
         transform: rotate(360deg);
       }
     }
+
     @-moz-keyframes spinner {
       0% {
         -webkit-transform: rotate(0deg);
@@ -192,6 +213,7 @@ Purpose: Sharing Technical Resources
         -o-transform: rotate(0deg);
         transform: rotate(0deg);
       }
+
       100% {
         -webkit-transform: rotate(360deg);
         -moz-transform: rotate(360deg);
@@ -209,6 +231,7 @@ Purpose: Sharing Technical Resources
         -o-transform: rotate(0deg);
         transform: rotate(0deg);
       }
+
       100% {
         -webkit-transform: rotate(360deg);
         -moz-transform: rotate(360deg);
@@ -217,6 +240,7 @@ Purpose: Sharing Technical Resources
         transform: rotate(360deg);
       }
     }
+
     @keyframes spinner {
       0% {
         -webkit-transform: rotate(0deg);
@@ -225,6 +249,7 @@ Purpose: Sharing Technical Resources
         -o-transform: rotate(0deg);
         transform: rotate(0deg);
       }
+
       100% {
         -webkit-transform: rotate(360deg);
         -moz-transform: rotate(360deg);
@@ -245,11 +270,645 @@ Purpose: Sharing Technical Resources
   <script src="https://d3js.org/d3.v3.min.js"></script>
   <script async="" src="https://cdn.iframe.ly/embed.js" charset="utf-8"></script>
   <script>
-    (function() {
-      var placeHolder=[{folder:"Hub Portal Tech Stack",children:[{folder:"Client Side",children:[{folder:"JS Libraries",children:[{link:"https://angularjs.org/"},{link:"https://momentjs.com"},{link:"https://jquery.com"},{link:"https://getbootstrap.com"}]},{folder:"Markup",children:[{link:"https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5"},{link:"https://www.markdownguide.org/getting-started"}]},{folder:"Analytics",children:[{link:"https://newrelic.com/"}]},{folder:"Styling",children:[{link:"http://lesscss.org/"},{link:"http://getbootstrap.com"},{folder:"CSS Animation",children:[{link:"https://daneden.github.io/animate.css/"}]}]},{folder:"Scripting",children:[{link:"https://developer.mozilla.org/en-US/docs/Web/JavaScript"},{link:"https://www.typescriptlang.org"}]}]},{folder:"Server Side",children:[{folder:"Authentication",children:[{link:"https://oauth.net/articles/authentication/"},{link:"https://www.wolfe.id.au/2012/10/20/what-is-hmac-authentication-and-why-is-it-useful/"}]},{folder:"ServiceNow",children:[{link:"https://www.servicenow.com/"},{folder:"Tables",children:[{link:"https://www.youtube.com/watch?v=a7Nrz0OU8XM&t=304s"}]},{folder:"APIs",children:[{link:"https://www.youtube.com/watch?v=-CzuZanEylc"},{link:"https://www.getpostman.com"}]}]},{folder:"Swagger",children:[{link:"https://github.com/swagger-api"}]}]},{folder:"Dev Tools",children:[{link:"https://code.visualstudio.com"},{link:"https://www.eclipse.org/ide/"},{link:"https://www.sourcetreeapp.com"},{link:"https://github.com"},{link:"http://tomcat.apache.org/"}]}]}];
+    (function (placeHolder) {
+      "use strict";
 
-      var jsonUrl=location.search&&location.search.replace("?json=","")||JSON.stringify(placeHolder),treeData=JSON.parse(decodeURIComponent(jsonUrl)),promiseArray=[],favicon="https://favicongrabber.com/api/grab/",iframelyApi="https://iframe.ly/api/oembed?url=";function generateUrl(t){return new Promise(function(e,r){if("string"!=typeof t.link)return"javascript:void(0)";var n=new URL(t.link),i=`${iframelyApi}${encodeURIComponent(t.link)}&api_key=cbce8adc63c693fc118a5d`,a=`${favicon}${(n.hostname||n.host||"").replace(/www\./i,"")}`,o=!1;fetch(a).then(function(t){return t.json()}).then(function(r){var n=r&&r.icons&&r.icons.length&&(r.icons||[])[2]||(r.icons||[])[1]||(r.icons||[])[0],i=n?n.src:null;t.favicon=i,o?e():o=!0}).catch(function(t){console.error(t),o?e():o=!0}),fetch(i).then(function(t){return t.json()}).then(function(r){r.status>400?(t.title=n.hostname||n.host,t.iframe=null):(t.title=r.title,t.iframe=r.html,t.metaData=r),o?e():o=!0}).catch(function(t){console.error(t),o?e():o=!0})})}function enrichJson(t){(t.children||t._children).forEach(function(t){!t.children&&t.link&&promiseArray.push(generateUrl(t))})}enrichJson(treeData[0]),Promise.all(promiseArray).then(function(t){update(root)}).catch(function(t){});var root,margin={top:0,right:0,bottom:0,left:200},width="2000",height=window.innerHeight-margin.top-margin.bottom,i=0,duration=750,tree=d3.layout.tree().size([height,width]),diagonal=d3.svg.diagonal().projection(function(t){return[t.y,t.x]}),svg=d3.select("section").append("svg").attr("width",width+margin.right+margin.left).attr("height",height+margin.top+margin.bottom).append("g").attr("transform","translate("+margin.left+","+margin.top+")");function collapse(t){t.children&&(t._children=t.children,t._children.forEach(collapse),t.children=null)}function update(t){var e=tree.nodes(root).reverse(),r=tree.links(e);e.forEach(function(t){t.y=180*t.depth});var n=svg.selectAll("g.node").data(e,function(t){return t.id||(t.id=++i)}),a=n.enter().append("g").attr("class","node").attr("transform",function(e){return"translate("+t.y0+","+t.x0+")"}).on("mouseover",function(t){var e=function(){var t=document.getElementsByTagName("aside")[0];t.innerHTML="",t.classList.remove("showpanel")};t.folder&&e();var r,n,i=document.getElementsByTagName("aside")[0];if(r=t.metaData){n=t.link?`<a href="${t.link}"><h1>${t.title}</h1></a>`:`<h1>${t.title}</h1>`,r.description&&(n+=`<h2>${r.description.substring(0,350)}</h2>`);r.author_url&&r.author_url;r.author_url&&r.author?n+=`<a href="${r.author_url}"><p><span class="author">Author</span>: ${r.author}</p></a>`:r.author&&(n+=`<p>Author: ${r.author}</p>`);var a=t.iframe;a||t.link&&(a='<iframe class="resize" src="'+t.link+'"><p>Your browser does not support iframes.</p></iframe>'),n+=a}if(!n)return void e();i.innerHTML=n,i.classList.add("showpanel"),setTimeout(function(){window.iframely&&window.iframely.load()},10)}).on("click",click);a.filter(function(t){return t.link&&t.favicon}).append("image").attr("y","5").attr("x","2").attr("href",function(t){return t.favicon}).attr("width","50").attr("height","50"),a.filter(function(t){return!t.link}).append("circle").attr("r",1e-6).style("fill",function(t){return t._children?"lightsteelblue":"#fff"}),a.append("text").attr("x",function(t){return t.children||t._children?-20:5}).attr("text-anchor",function(t){return t.children||t._children?"end":"start"}).text(function(t){return t.folder||t.title}).style("fill-opacity",1e-6);var o=n.transition().duration(duration).attr("transform",function(t){return"translate("+t.y+","+t.x+")"});o.select("circle").attr("r",10).style("fill",function(t){return t._children?"lightsteelblue":"#fff"}),o.select("text").style("fill-opacity",1);var l=n.exit().transition().duration(duration).attr("transform",function(e){return"translate("+t.y+","+t.x+")"}).remove();l.select("circle").attr("r",1e-6),l.select("text").style("fill-opacity",1e-6);var c=svg.selectAll("path.link").data(r,function(t){return t.target.id});c.enter().insert("path","g").attr("class","link").attr("d",function(e){var r={x:t.x0,y:t.y0};return diagonal({source:r,target:r})}),c.transition().duration(duration).attr("d",diagonal),c.exit().transition().duration(duration).attr("d",function(e){var r={x:t.x,y:t.y};return diagonal({source:r,target:r})}).remove(),e.forEach(function(t){t.x0=t.x,t.y0=t.y})}function click(t){if(!t.children&&t.folder){var e=document.getElementsByClassName("load")[0];e.classList.add("loading"),promiseArray=[],enrichJson(t),Promise.all(promiseArray).then(function(t){e.classList.remove("loading"),r()}).catch(function(t){console.error(t)})}else r();function r(){t.link?window.open(t.link,"_blank"):(t.children?(t._children=t.children,t.children=null):(t.children=t._children,t._children=null),update(t))}}(root=treeData[0]).x0=height/2,root.y0=0,root.children.forEach(collapse),d3.select(self.frameElement).style("height","500px");
-    })();
+      var jsonUrl = location.search && location.search.replace('?json=', '') || JSON.stringify(placeHolder);
+      var treeData = JSON.parse(decodeURIComponent(jsonUrl));
+      var promiseArray = [];
+      var favicon = 'https://favicongrabber.com/api/grab/';
+      var iframelyApi = 'https://iframe.ly/api/oembed?url=';
+
+      enrichJson(treeData[0]);
+      populateDiagram(promiseArray);
+
+      function enrichJson(data) {
+        (data.children || data._children).forEach(function (item) {
+          !item.children && item.link && promiseArray.push(generateUrl(item));
+        });
+      }
+
+      function generateUrl(item) {
+        return new Promise(function (resolve, reject) {
+
+          if (typeof item.link !== 'string') {
+            return 'javascript:void(0)';
+          }
+
+          var urlString = new URL(item.link);
+          var iframeUrl = `${iframelyApi}${encodeURIComponent(item.link)}&api_key=cbce8adc63c693fc118a5d`;
+          var url = `${favicon}${(urlString.hostname || urlString.host || '').replace(/www\./i, '')}`;
+          var fetchComplete = false;
+
+          // Fetching Favicon
+          fetch(url)
+            .then(function (response) {
+              return response.json();
+            })
+            .then(function (myJson) {
+
+              var data = myJson && myJson.icons && myJson.icons.length && (myJson.icons || [])[0];
+              var src = data ? data.src : null;
+
+              item.favicon = src;
+
+              if (fetchComplete) {
+
+                resolve();
+              } else {
+
+                fetchComplete = true;
+              }
+
+            })
+            .catch(function (error) {
+              console.error(error);
+
+              if (fetchComplete) {
+
+                resolve();
+              } else {
+
+                fetchComplete = true;
+              }
+            });
+
+          // Fetching Title
+          fetch(iframeUrl)
+            .then(function (response) {
+              return response.json();
+            })
+            .then(function (myJson) {
+
+              if (myJson.status > 400) {
+
+                item.title = urlString.hostname || urlString.host;
+                item.iframe = null;
+
+              } else {
+
+                item.title = myJson.title;
+                item.iframe = myJson.html;
+                item.metaData = myJson;
+              }
+
+              if (fetchComplete) {
+
+                resolve();
+              } else {
+
+                fetchComplete = true;
+              }
+
+            })
+            .catch(function (error) {
+
+              console.error(error);
+
+              if (fetchComplete) {
+
+                resolve();
+              } else {
+
+                fetchComplete = true;
+              }
+            });
+        });
+      }
+
+      function populateDiagram() {
+
+        var margin = { top: 0, right: 0, bottom: 0, left: 200 };
+        var width = '2000';
+        var height = (window.innerHeight - margin.top - margin.bottom);
+        var i = 0, duration = 750, root;
+        var tree = d3.layout.tree().size([height, width]);
+        var diagonal = d3.svg.diagonal().projection(function (d) { return [d.y, d.x]; });
+        var svg = d3
+          .select("section")
+          .append("svg")
+          .attr("width", width + margin.right + margin.left)
+          .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        Promise.all(promiseArray)
+          .then(function () {
+            update(root);
+          })
+          .catch(function (e) {
+            throw new Error(e);
+          });
+
+        root = treeData[0];
+        root.x0 = height / 2;
+        root.y0 = 0;
+
+        // TODO collapse only if links (expand folders)
+        root.children.forEach(collapse);
+        function collapse(d) {
+          if (d.children) {
+            d._children = d.children
+            d._children.forEach(collapse)
+            d.children = null
+          }
+        }
+
+        d3.select(self.frameElement).style("height", "500px");
+
+        function update(source) {
+
+          // Compute the new tree layout.
+          var nodes = tree.nodes(root).reverse(),
+            links = tree.links(nodes);
+
+          // Normalize for fixed-depth.
+          nodes.forEach(function (d) { d.y = d.depth * 180; });
+
+          // Update the nodes…
+          var node = svg.selectAll("g.node").data(nodes, function (d) { return d.id || (d.id = ++i); });
+
+          // Enter any new nodes at the parent's previous position.
+          var nodeEnter = node.enter().append("g")
+            .attr("class", "node")
+            .attr("transform", function (d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+            .on("mouseover", showPanel)
+            .on("click", click);
+
+          function showPanel(event) {
+
+            var closePanel = function () {
+
+              var temp = document.getElementsByTagName('aside')[0];
+
+              temp.innerHTML = '';
+              temp.classList.remove('showpanel');
+
+              return;
+            };
+
+            if (event.folder) {
+              closePanel();
+            }
+
+            var temp = document.getElementsByTagName('aside')[0];
+
+            var metaData, string;
+            if (metaData = event.metaData) {
+
+
+              if (event.link) {
+
+                string = `<a href="${event.link}"><h1>${event.title}</h1></a>`;
+              } else {
+                string = `<h1>${event.title}</h1>`;
+              }
+
+              metaData.description && (string = string + `<h2>${metaData.description.substring(0, 350)}</h2>`);
+
+              var authorUrl = metaData.author_url ? `<span><a href="${metaData.author_url}">Visit</a></span>` : '';
+
+              if (metaData.author_url && metaData.author) {
+
+                string = string + `<a href="${metaData.author_url}"><p><span class="author">Author</span>: ${metaData.author}</p></a>`;
+
+              } else {
+                metaData.author && (string = string + `<p>Author: ${metaData.author}</p>`);
+              }
+
+              var $iframe = event.iframe;
+
+              if (!$iframe) {
+                event.link ? ($iframe = "<iframe class=\"resize\" src=\"" + event.link + "\"><p>Your browser does not support iframes.</p></iframe>") : '';
+              }
+
+              string = string + $iframe;
+            }
+
+            if (!string) {
+              closePanel();
+              return;
+            }
+
+            temp.innerHTML = string;
+            temp.classList.add('showpanel');
+
+            setTimeout(function () {
+              window.iframely && window.iframely.load();
+            }, 10);
+          }
+
+
+          // Image
+          nodeEnter
+            .filter(function (item) { return item.link && item.favicon; })
+            .append("image")
+            .attr("y", "5")
+            .attr("x", "2")
+            .attr("href", function (i) { return i.favicon; })
+            .attr("width", "50")
+            .attr("height", "50");
+
+          // Text
+          nodeEnter
+            .filter(function (item) { return !item.link; })
+            .append("circle")
+            .attr("r", 1e-6)
+            .style("fill", function (d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+          nodeEnter.append("text")
+            .attr("x", function (d) { return d.children || d._children ? -20 : 5; })
+            .attr("text-anchor", function (d) { return d.children || d._children ? "end" : "start"; })
+            .text(function (d) { return d.folder || d.title; })
+            .style("fill-opacity", 1e-6);
+
+          // Transition nodes to their new position.
+          var nodeUpdate = node.transition()
+            .duration(duration)
+            .attr("transform", function (d) { return "translate(" + d.y + "," + d.x + ")"; });
+
+          nodeUpdate.select("circle")
+            .attr("r", 10)
+            .style("fill", function (d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+          nodeUpdate.select("text")
+            .style("fill-opacity", 1);
+
+          // Transition exiting nodes to the parent's new position.
+          var nodeExit = node.exit().transition()
+            .duration(duration)
+            .attr("transform", function (d) { return "translate(" + source.y + "," + source.x + ")"; })
+            .remove();
+
+          nodeExit.select("circle")
+            .attr("r", 1e-6);
+
+          nodeExit.select("text")
+            .style("fill-opacity", 1e-6);
+
+          // Update the links…
+          var link = svg.selectAll("path.link")
+            .data(links, function (d) { return d.target.id; });
+
+          // Enter any new links at the parent's previous position.
+          link.enter().insert("path", "g")
+            .attr("class", "link")
+            .attr("d", function (d) {
+              var o = { x: source.x0, y: source.y0 };
+              return diagonal({ source: o, target: o });
+            });
+
+          // Transition links to their new position.
+          link.transition()
+            .duration(duration)
+            .attr("d", diagonal);
+
+          // Transition exiting nodes to the parent's new position.
+          link.exit().transition()
+            .duration(duration)
+            .attr("d", function (d) {
+              var o = { x: source.x, y: source.y };
+              return diagonal({ source: o, target: o });
+            })
+            .remove();
+
+          // Stash the old positions for transition.
+          nodes.forEach(function (d) {
+            d.x0 = d.x;
+            d.y0 = d.y;
+          });
+        }
+
+        function click(d) {
+
+          if (!d.children && !!d.folder) {
+
+            var $loading = document.getElementsByClassName('load')[0];
+            $loading.classList.add('loading');
+
+            promiseArray = [];
+
+            enrichJson(d);
+
+            Promise
+              .all(promiseArray)
+              .then(function (data) {
+
+                $loading.classList.remove('loading');
+                redraw();
+              })
+              .catch(function (error) { console.error(error) });
+
+          } else {
+
+            redraw();
+          }
+
+          function redraw() {
+
+            if (d.link) {
+              window.open(d.link, '_blank');
+              return;
+            }
+
+            if (d.children) {
+              d._children = d.children;
+              d.children = null;
+            } else {
+              d.children = d._children;
+              d._children = null;
+            }
+            update(d);
+          }
+        }
+      }
+    })([
+      {
+        "folder": "Hussein Qudsi Technologies:",
+        "children": [
+          {
+            "folder": "Cloud, CMS, SaaS & Mobile Platforms",
+            "children": [
+              {
+                "folder": "AWS",
+                "children": [
+                  {
+                    "link": "https://aws.amazon.com/api-gateway/"
+                  },
+                  {
+                    "link": "https://aws.amazon.com/lambda/"
+                  },
+                  {
+                    "link": "https://aws.amazon.com/s3/"
+                  },
+                  {
+                    "link": "https://aws.amazon.com/dynamodb/?hp=tile&so-exp=below"
+                  }
+                ]
+              },
+              {
+                "folder": "Firebase",
+                "children": [
+                  {
+                    "link": "https://firebase.google.com/"
+                  },
+                  {
+                    "link": "https://firebase.google.com/products"
+                  }
+                ]
+              },
+              {
+                "folder": "ServiceNow",
+                "children": [
+                  {
+                    "link": "https://www.servicenow.com/"
+                  },
+                  {
+                    "link": "https://www.servicenow.com/now-platform.html"
+                  }
+                ]
+              },
+              {
+                "folder": "CMS",
+                "children": [
+                  {
+                    "link": "https://www.drupal.org/"
+                  },
+                  {
+                    "link": "https://wordpress.com/"
+                  },
+
+
+                ]
+              }
+            ]
+          },
+          {
+            "folder": "Client Side",
+            "children": [
+              {
+                "folder": "JS Frameworks",
+                "children": [
+
+                  {
+                    "link": "https://reactjs.org/"
+                  },
+                  {
+                    "link": "https://www.polymer-project.org/"
+                  },
+                  {
+                    "folder": "Angular",
+                    "children": [
+                      {
+                        "link": "https://angular.io/"
+                      },
+                      {
+                        "link": "https://angularjs.org/"
+                      }
+                    ]
+                  },
+                  {
+                    "folder": "JQuery",
+                    "children": [
+                      {
+                        "link": "https://jquery.com/"
+                      },
+                      {
+                        "link": "https://jqueryui.com/"
+                      },
+                      {
+                        "link": "https://jquerymobile.com/"
+                      }
+                    ]
+                  },
+                ]
+              },
+              {
+                "folder": "JS Library",
+                "children": [
+                  {
+                    "link": "https://momentjs.com"
+                  },
+                  {
+                    "link": "https://lodash.com"
+                  },
+                  {
+                    "link": "https://d3js.org/"
+                  },
+                  {
+                    "link": "https://jasmine.github.io/"
+                  },
+                  {
+                    "folder": "Data Visualization",
+                    "children": [
+
+                      {
+                        "link": "https://www.highcharts.com/"
+                      },
+                      {
+                        "link": "https://d3js.org/"
+                      },
+                    ]
+                  }
+
+                ]
+              },
+              {
+                "folder": "UI",
+                "children": [
+                  {
+                    "link": "https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5"
+                  },
+                  {
+                    "link": "https://www.w3.org/WAI/standards-guidelines/wcag/"
+                  },
+                  {
+                    "link": "https://www.w3.org/WAI/standards-guidelines/aria/"
+                  },
+                  {
+                    "link": "https://sass-lang.com/"
+                  },
+                  {
+                    "link": "https://daneden.github.io/animate.css/"
+                  },
+                  {
+                    "link": "http://lesscss.org/"
+                  },
+                  {
+                    "link": "http://getbootstrap.com"
+                  },
+                ]
+              },
+              {
+                "folder": "Analytics",
+                "children": [
+                  {
+                    "link": "https://newrelic.com/"
+                  },
+                  {
+                    "link": "https://analytics.google.com/analytics"
+                  },
+                  {
+                    "link": "https://www.adobe.com/analytics/web-analytics.html"
+                  }
+                ]
+              },
+              {
+                "folder": "Scripting",
+                "children": [
+                  {
+                    "link": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+                  },
+                  {
+                    "link": "https://www.typescriptlang.org"
+                  },
+                  {
+                    "link": "https://babeljs.io/"
+                  },
+                ]
+              }
+            ]
+          },
+          {
+            "folder": "Server Side",
+            "children": [
+              {
+                "link": "https://nodejs.org/en/"
+              },
+              {
+                "link": "https://www.java.com/en/"
+              },
+              {
+                "link": "https://restfulapi.net/"
+              },
+              {
+                "link": "https://github.com/swagger-api"
+              },
+              {
+                "folder": "ServerLess",
+                "children": [
+                  {
+                    "link": "https://aws.amazon.com/serverless/"
+                  },
+                  {
+                    "link": "https://firebase.google.com/products/functions"
+                  },
+                ]
+              },
+              {
+                "folder": "Authentication",
+                "children": [
+                  {
+                    "link": "https://oauth.net/articles/authentication/"
+                  },
+                  {
+                    "link": "https://www.wolfe.id.au/2012/10/20/what-is-hmac-authentication-and-why-is-it-useful/"
+                  },
+                  {
+                    "link": "https://jwt.io/"
+                  }
+                ]
+              },
+              {
+                "folder": "DataBase",
+                "children": [
+                  {
+                    "link": "https://www.mongodb.com/"
+                  },
+                  {
+                    "link": "https://mariadb.org/"
+                  },
+                  {
+                    "link": "https://firebase.google.com/products/realtime-database"
+                  },
+                  {
+                    "link": "https://aws.amazon.com/dynamodb/"
+                  },
+                ]
+              },
+            ]
+          },
+          {
+            "folder": "Mobile Hybrid",
+            "children": [
+              {
+                "link": "https://flutter.dev/"
+              },
+              {
+                "link": "https://ionicframework.com/"
+              },
+              {
+                "link": "https://reactnative.dev/"
+              }
+            ]
+          },
+          {
+            "folder": "Dev Tools",
+            "children": [
+              {
+                "link": "https://code.visualstudio.com"
+              },
+              {
+                "link": "https://www.eclipse.org/ide/"
+              },
+              {
+                "link": "https://www.sourcetreeapp.com"
+              },
+              {
+                "link": "https://github.com"
+              },
+              {
+                "link": "https://about.gitlab.com/"
+              },
+              {
+                "link": "http://tomcat.apache.org/"
+              }
+            ]
+          }
+        ]
+      }
+    ]);
   </script>
 </body>
+
 </html>
